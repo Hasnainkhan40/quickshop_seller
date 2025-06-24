@@ -1,4 +1,3 @@
-import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:quickshop_seller/const/const.dart';
 import 'package:quickshop_seller/const/images.dart';
@@ -46,6 +45,18 @@ class ProductDetails extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   boldText(text: "Product title", color: fontGrey, size: 16.0),
+                  10.heightBox,
+                  Row(
+                    children: [
+                      boldText(text: "Category", color: fontGrey, size: 16.0),
+                      10.heightBox,
+                      boldText(
+                        text: "Subcategory",
+                        color: fontGrey,
+                        size: 16.0,
+                      ),
+                    ],
+                  ),
                   10.heightBox,
                   //rating
                   VxRating(
@@ -109,7 +120,7 @@ class ProductDetails extends StatelessWidget {
                   20.heightBox,
                   boldText(text: "Description", color: fontGrey),
                   10.heightBox,
-                  boldText(text: "Description of this item", color: fontGrey),
+                  boldText(text: "Description of this item", color: darkGrey),
                 ],
               ),
             ),

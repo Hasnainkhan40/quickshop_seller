@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:quickshop_seller/const/colors.dart';
 import 'package:quickshop_seller/const/const.dart';
 import 'package:quickshop_seller/views/orders_screen/components/order_place.dart';
+import 'package:quickshop_seller/views/widgets/our_button.dart';
 import 'package:quickshop_seller/views/widgets/text_style.dart';
 
 class OrdersDetails extends StatelessWidget {
@@ -19,6 +20,11 @@ class OrdersDetails extends StatelessWidget {
           icon: Icon(Icons.arrow_back, color: darkGrey),
         ),
         title: boldText(text: "Order details", color: fontGrey, size: 16.0),
+      ),
+      bottomNavigationBar: SizedBox(
+        height: 60,
+        width: context.screenWidth,
+        child: ourButton(color: green, onPress: () {}, title: "Confirm Order"),
       ),
       body: Padding(
         padding: EdgeInsets.all(8.0),
@@ -140,7 +146,7 @@ class OrdersDetails extends StatelessWidget {
                     ),
                   ),
                 ],
-              ).box.outerShadowMd.white.make(),
+              ).box.outerShadowMd.border(color: lightGrey).roundedSM.white.make(),
               const Divider(),
               10.heightBox,
 
