@@ -1,4 +1,3 @@
-import 'package:cupertino_icons/cupertino_icons.dart';
 import 'package:quickshop_seller/const/const.dart';
 import 'package:quickshop_seller/const/images.dart';
 
