@@ -42,7 +42,7 @@ class Home extends StatelessWidget {
       bottomNavigationBar: Obx(
         () => BottomNavigationBar(
           onTap: (index) {
-            print("Tapped index: $index");
+            // print("Tapped index: $index");
             controller.navIndex.value = index;
           },
           backgroundColor: white,

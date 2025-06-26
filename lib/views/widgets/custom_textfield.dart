@@ -3,6 +3,7 @@ import 'package:quickshop_seller/views/widgets/text_style.dart';
 
 Widget customTextField({lable, hint, controller, isDesc = false}) {
   return TextFormField(
+    style: TextStyle(color: white),
     maxLines: isDesc ? 4 : 1,
     decoration: InputDecoration(
       isDense: true,

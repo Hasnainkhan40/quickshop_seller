@@ -8,7 +8,7 @@ FirebaseFirestore firebaseFirestore = FirebaseFirestore.instance;
 User? currentUser = auth.currentUser;
 
 //collection
-const usersCollection = "vendors";
+const vendorsCollection = "vendors";
 const productsCollection = "products";
 const chatsCollction = "chats";
 const messageCollection = "messages";

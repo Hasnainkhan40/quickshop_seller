@@ -5,6 +5,8 @@ import 'package:quickshop_seller/const/firebase_const.dart';
 import 'package:velocity_x/velocity_x.dart';
 
 class AuthControler extends GetxController {
+  // final vendorsCollection = FirebaseFirestore.instance.collection('vendors');
+
   var isLoding = false.obs;
   //textController
   var emailController = TextEditingController();
