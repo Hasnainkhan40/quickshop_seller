@@ -9,7 +9,7 @@ class ProfileController extends GetxController {
   late QueryDocumentSnapshot snapshotData;
   var profileImagePath = ''.obs;
 
-  var isLoding = false.obs;
+  var isLoading = false.obs;
 
   //textFiled
   var nameController = TextEditingController();
@@ -38,7 +38,7 @@ class ProfileController extends GetxController {
       'password': password,
       'imageUrl': imageUrl,
     }, SetOptions(merge: true));
-    isLoding(false);
+    isLoading(false);
   }
 
   changeAuthPassword({email, password, newpassword}) async {

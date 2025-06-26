@@ -56,7 +56,7 @@ class ProfileScreen extends StatelessWidget {
         future: StoreServices.getProfile(currentUser!.uid),
 
         builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
-          //   print("Current UID: ${currentUser!.uid}");
+          print("Current UID: ${currentUser!.uid}");
           if (!snapshot.hasData) {
             return lodingIndicator(circleColor: white);
           } else if (snapshot.data!.docs.isEmpty) {

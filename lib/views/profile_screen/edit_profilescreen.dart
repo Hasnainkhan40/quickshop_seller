@@ -42,35 +42,57 @@ class _EditProfilescreenState extends State<EditProfilescreen> {
                 : TextButton(
                   onPressed: () async {
                     controller.isLoading(true);
-                    //if old password matches data base
-                    if (controller.snapshotData['password'] ==
-                        controller.oldpassController.text) {
-                      await controller.changeAuthPassword(
-                        email: controller.snapshotData['email'],
-                        password: controller.oldpassController.text,
-                        newpassword: controller.newpassController.text,
-                      );
 
-                      await controller.updateProfile(
-                        imageUrl: '',
-                        name: controller.nameController.text,
-                        password: controller.newpassController.text,
-                      );
-                      VxToast.show(context, msg: "Update");
-                    } else if (controller
-                            .oldpassController
-                            .text
-                            .isEmptyOrNull &&
-                        controller.nameController.text.isEmptyOrNull) {
-                      await controller.updateProfile(
-                        imageUrl: '',
-                        name: controller.nameController.text,
-                        password: controller.snapshotData['password'],
-                      );
-                      VxToast.show(context, msg: "Update");
-                    } else {
-                      VxToast.show(context, msg: "Some error occured");
-                      controller.isLoding(false);
+                    final oldPass = controller.oldpassController.text.trim();
+                    final newPass = controller.newpassController.text.trim();
+                    final newName = controller.nameController.text.trim();
+                    final currentPass = controller.snapshotData['password'];
+                    final currentName = controller.snapshotData['vendor_name'];
+
+                    bool isPasswordChangeRequested =
+                        oldPass.isNotEmpty && newPass.isNotEmpty;
+                    bool isNameChanged =
+                        newName.isNotEmpty && newName != currentName;
+
+                    try {
+                      if (isPasswordChangeRequested) {
+                        if (oldPass == currentPass) {
+                          await controller.changeAuthPassword(
+                            email: controller.snapshotData['email'],
+                            password: oldPass,
+                            newpassword: newPass,
+                          );
+
+                          await controller.updateProfile(
+                            imageUrl: '',
+                            name: newName.isNotEmpty ? newName : currentName,
+                            password: newPass,
+                          );
+
+                          VxToast.show(
+                            context,
+                            msg: "Password and profile updated",
+                          );
+                        } else {
+                          VxToast.show(
+                            context,
+                            msg: "Old password is incorrect",
+                          );
+                        }
+                      } else if (isNameChanged) {
+                        await controller.updateProfile(
+                          imageUrl: '',
+                          name: newName,
+                          password: currentPass,
+                        );
+                        VxToast.show(context, msg: "Profile name updated");
+                      } else {
+                        VxToast.show(context, msg: "Nothing to update");
+                      }
+                    } catch (e) {
+                      VxToast.show(context, msg: "Error: $e");
+                    } finally {
+                      controller.isLoading(false);
                     }
                   },
                   child: normalText(text: save),
@@ -109,7 +131,7 @@ class _EditProfilescreenState extends State<EditProfilescreen> {
                 child: normalText(text: changeImage, color: fontGrey),
               ),
               10.heightBox,
-              Divider(color: white),
+
               customTextField(
                 lable: name,
                 hint: "eg. Bada Devs",
