@@ -16,6 +16,13 @@ class ProfileController extends GetxController {
   var oldpassController = TextEditingController();
   var newpassController = TextEditingController();
 
+  //shop cantroller
+  var shopNameController = TextEditingController();
+  var shopAddressController = TextEditingController();
+  var shopMobileController = TextEditingController();
+  var shopWebsiteController = TextEditingController();
+  var shopDescController = TextEditingController();
+
   changeImage(context) async {
     try {
       final img = await ImagePicker().pickImage(
@@ -49,5 +56,19 @@ class ProfileController extends GetxController {
           currentUser!.updatePassword(newpassword);
         })
         .catchError((error) {});
+  }
+
+  updateShop({shopname, shopaddress, shopmobile, shopwebsite, shopdesc}) async {
+    var store = firebaseFirestore
+        .collection(vendorsCollection)
+        .doc(currentUser!.uid);
+    await store.set({
+      'shop_name': shopname,
+      'shop_address': shopaddress,
+      'shop_mobile': shopmobile,
+      'shop_website': shopwebsite,
+      'shop_desc': shopdesc,
+    }, SetOptions(merge: true));
+    isLoading(false);
   }
 }
