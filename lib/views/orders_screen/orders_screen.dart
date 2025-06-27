@@ -27,6 +27,7 @@ class OrdersScreen extends StatelessWidget {
             return lodingIndicator();
           } else {
             var data = snapshot.data!.docs;
+
             return Padding(
               padding: EdgeInsets.all(8.0),
               child: SingleChildScrollView(
@@ -38,6 +39,7 @@ class OrdersScreen extends StatelessWidget {
                       onTap: () {
                         Get.to(() => OrdersDetails(data: data[index]));
                       },
+
                       textColor: textfieldGrey,
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(12),
