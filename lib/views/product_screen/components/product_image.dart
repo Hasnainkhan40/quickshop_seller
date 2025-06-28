@@ -10,5 +10,6 @@ Widget productImages({required label, onPress}) {
       .box
       .color(lightGrey)
       .roundedSM
+      .size(80, 80)
       .make();
 }

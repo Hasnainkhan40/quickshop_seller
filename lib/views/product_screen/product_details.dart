@@ -80,7 +80,11 @@ class ProductDetails extends StatelessWidget {
                     maxRating: 5,
                   ),
                   10.heightBox,
-                  boldText(text: "${data['P_price']}", color: red, size: 18.0),
+                  boldText(
+                    text: "\$ ${data['P_price']}",
+                    color: red,
+                    size: 18.0,
+                  ),
                   //color section
                   20.heightBox,
                   Column(
@@ -94,7 +98,7 @@ class ProductDetails extends StatelessWidget {
                           ),
                           Row(
                             children: List.generate(
-                              3,
+                              data['P_colors'].length,
                               (index) => VxBox()
                                   .size(40, 40)
                                   .roundedFull

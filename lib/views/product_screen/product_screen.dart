@@ -6,6 +6,7 @@ import 'package:quickshop_seller/const/firebase_const.dart';
 import 'package:quickshop_seller/const/images.dart';
 import 'package:quickshop_seller/const/lists.dart';
 import 'package:quickshop_seller/const/loading_indicator.dart';
+import 'package:quickshop_seller/controller/product_controller.dart';
 import 'package:quickshop_seller/services/store_services.dart';
 import 'package:quickshop_seller/views/product_screen/add_product.dart';
 import 'package:quickshop_seller/views/product_screen/product_details.dart';
@@ -18,10 +19,13 @@ class ProductScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    var controller = Get.put(ProductController());
     return Scaffold(
       floatingActionButton: FloatingActionButton(
         backgroundColor: purpleColor,
-        onPressed: () {
+        onPressed: () async {
+          await controller.getCategories();
+          controller.populateCategoryList();
           Get.to(() => AddProduct());
         },
         child: const Icon(Icons.add),
