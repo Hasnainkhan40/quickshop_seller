@@ -30,11 +30,11 @@ class AddProduct extends StatelessWidget {
                 : TextButton(
                   onPressed: () async {
                     controller.isloading(true);
-                    await controller.uoloadImages();
+                    await controller.uploadImages();
                     await controller.uploadProduct(context);
                     Get.back();
                   },
-                  child: boldText(text: save, color: purpleColor),
+                  child: boldText(text: save, color: white),
                 ),
           ],
         ),

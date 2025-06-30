@@ -32,7 +32,7 @@ class ProductDetails extends StatelessWidget {
               itemBuilder: (contex, index) {
                 return Image.network(
                   data['P_imgs'][index],
-                  // data['P_imgs'][index],
+
                   width: double.infinity,
                   fit: BoxFit.cover,
                 );

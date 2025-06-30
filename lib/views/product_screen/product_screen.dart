@@ -50,12 +50,22 @@ class ProductScreen extends StatelessWidget {
                         onTap: () {
                           Get.to(() => ProductDetails(data: data[index]));
                         },
-                        leading: Image.network(
-                          data[index]['P_imgs'][0],
-                          width: 100,
-                          height: 100,
-                          fit: BoxFit.cover,
-                        ),
+                        leading:
+                            (data[index]['P_imgs'] != null &&
+                                    data[index]['P_imgs'] is List &&
+                                    (data[index]['P_imgs'] as List).isNotEmpty)
+                                ? Image.network(
+                                  data[index]['P_imgs'][0],
+                                  width: 100,
+                                  height: 100,
+                                  fit: BoxFit.cover,
+                                )
+                                : Container(
+                                  width: 100,
+                                  height: 100,
+                                  color: Colors.grey.shade300,
+                                  child: Icon(Icons.image_not_supported),
+                                ),
                         title: boldText(
                           text: "${data[index]['P_name']}",
                           color: fontGrey,

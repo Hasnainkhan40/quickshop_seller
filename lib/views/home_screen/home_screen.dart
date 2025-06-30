@@ -95,11 +95,11 @@ class HomeScreen extends StatelessWidget {
                                   fit: BoxFit.cover,
                                 ),
                                 title: boldText(
-                                  text: "${data[index]['P_name'][0]}",
+                                  text: "${data[index]['P_name']}",
                                   color: fontGrey,
                                 ),
                                 subtitle: normalText(
-                                  text: "\$${data[index]['P_price'][0]}",
+                                  text: "\$${data[index]['P_price']}",
                                   color: darkGrey,
                                 ),
                               ),
