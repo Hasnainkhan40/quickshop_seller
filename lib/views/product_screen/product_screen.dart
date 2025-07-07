@@ -80,7 +80,7 @@ class ProductScreen extends StatelessWidget {
                             boldText(
                               text:
                                   data[index]['is_featured'] == true
-                                      ? "Featured"
+                                      ? "   Featured"
                                       : '',
                               color: green,
                             ),

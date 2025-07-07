@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:get/get_rx/src/rx_types/rx_types.dart';
 import 'package:get/get_state_manager/get_state_manager.dart';
 import 'package:get/instance_manager.dart';
@@ -35,6 +36,12 @@ class _EditProfilescreenState extends State<EditProfilescreen> {
         resizeToAvoidBottomInset: false,
         backgroundColor: purpleColor,
         appBar: AppBar(
+          leading: IconButton(
+            onPressed: () {
+              Get.back();
+            },
+            icon: Icon(Icons.arrow_back, color: white),
+          ),
           title: boldText(text: editProfile, size: 16.0),
           actions: [
             controller.isLoading.value
@@ -53,6 +60,10 @@ class _EditProfilescreenState extends State<EditProfilescreen> {
                         oldPass.isNotEmpty && newPass.isNotEmpty;
                     bool isNameChanged =
                         newName.isNotEmpty && newName != currentName;
+                    bool isImageChanged =
+                        controller.profileImageUrl.value.isNotEmpty &&
+                        controller.profileImageUrl.value !=
+                            controller.snapshotData['imageUrl'];
 
                     try {
                       if (isPasswordChangeRequested) {
@@ -64,8 +75,11 @@ class _EditProfilescreenState extends State<EditProfilescreen> {
                           );
 
                           await controller.updateProfile(
-                            imageUrl: '',
-                            name: newName.isNotEmpty ? newName : currentName,
+                            imageUrl:
+                                isImageChanged
+                                    ? controller.profileImageUrl.value
+                                    : controller.snapshotData['imageUrl'],
+                            name: isNameChanged ? newName : currentName,
                             password: newPass,
                           );
 
@@ -79,13 +93,16 @@ class _EditProfilescreenState extends State<EditProfilescreen> {
                             msg: "Old password is incorrect",
                           );
                         }
-                      } else if (isNameChanged) {
+                      } else if (isNameChanged || isImageChanged) {
                         await controller.updateProfile(
-                          imageUrl: '',
-                          name: newName,
+                          imageUrl:
+                              isImageChanged
+                                  ? controller.profileImageUrl.value
+                                  : controller.snapshotData['imageUrl'],
+                          name: isNameChanged ? newName : currentName,
                           password: currentPass,
                         );
-                        VxToast.show(context, msg: "Profile name updated");
+                        VxToast.show(context, msg: "Profile updated");
                       } else {
                         VxToast.show(context, msg: "Nothing to update");
                       }
@@ -95,6 +112,7 @@ class _EditProfilescreenState extends State<EditProfilescreen> {
                       controller.isLoading(false);
                     }
                   },
+
                   child: normalText(text: save),
                 ),
           ],
@@ -126,7 +144,7 @@ class _EditProfilescreenState extends State<EditProfilescreen> {
               ElevatedButton(
                 style: ElevatedButton.styleFrom(backgroundColor: white),
                 onPressed: () {
-                  controller.changeImage(context);
+                  controller.updateProfilePicture(context);
                 },
                 child: normalText(text: changeImage, color: fontGrey),
               ),

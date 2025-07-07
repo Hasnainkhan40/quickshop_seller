@@ -9,9 +9,13 @@ import 'package:image_picker/image_picker.dart';
 import 'package:quickshop_seller/const/const.dart';
 import 'package:quickshop_seller/controller/home_controller.dart';
 import 'package:quickshop_seller/models/category_model.dart';
+import 'package:dio/dio.dart' as dio;
+
 import 'package:path/path.dart';
 
 class ProductController extends GetxController {
+  var profileImagePath = ''.obs; // local file path
+  var profileImageUrl = ''.obs; // uploaded image URL
   var isloading = false.obs;
   //text filed controllers
 
@@ -69,50 +73,50 @@ class ProductController extends GetxController {
     }
   }
 
-  uploadImages() async {
-    pImagesLinks.clear();
+  // uploadImages() async {
+  //   pImagesLinks.clear();
 
-    // Optional: remove null or invalid files
-    pImagesList.removeWhere((file) => file == null || !file.existsSync());
+  //   // Optional: remove null or invalid files
+  //   pImagesList.removeWhere((file) => file == null || !file.existsSync());
 
-    for (var i = 0; i < pImagesList.length; i++) {
-      var item = pImagesList[i];
+  //   for (var i = 0; i < pImagesList.length; i++) {
+  //     var item = pImagesList[i];
 
-      if (item != null && await item.exists()) {
-        final size = await item.length();
+  //     if (item != null && await item.exists()) {
+  //       final size = await item.length();
 
-        if (size == 0) {
-          debugPrint("❌ Skipping file at index $i: File is empty.");
-          continue;
-        }
+  //       if (size == 0) {
+  //         debugPrint(" Skipping file at index $i: File is empty.");
+  //         continue;
+  //       }
 
-        try {
-          final filename = basename(item.path);
-          final safeFilename =
-              '${DateTime.now().millisecondsSinceEpoch}_$filename';
-          final destination =
-              'images/vendors/${currentUser!.uid}/$safeFilename';
+  //       try {
+  //         final filename = basename(item.path);
+  //         final safeFilename =
+  //             '${DateTime.now().millisecondsSinceEpoch}_$filename';
+  //         final destination =
+  //             'images/vendors/${currentUser!.uid}/$safeFilename';
 
-          debugPrint("✅ Uploading: ${item.path} to $destination");
+  //         debugPrint(" Uploading: ${item.path} to $destination");
 
-          Reference ref = FirebaseStorage.instance.ref().child(destination);
-          UploadTask uploadTask = ref.putFile(item);
-          TaskSnapshot snapshot = await uploadTask;
+  //         Reference ref = FirebaseStorage.instance.ref().child(destination);
+  //         UploadTask uploadTask = ref.putFile(item);
+  //         TaskSnapshot snapshot = await uploadTask;
 
-          final downloadUrl = await snapshot.ref.getDownloadURL();
-          pImagesLinks.add(downloadUrl);
+  //         final downloadUrl = await snapshot.ref.getDownloadURL();
+  //         pImagesLinks.add(downloadUrl);
 
-          debugPrint("✅ Uploaded: $downloadUrl");
-        } catch (e) {
-          debugPrint("❌ Error uploading file at index $i: $e");
-        }
-      } else {
-        debugPrint("❌ File at index $i is null or does not exist: $item");
-      }
-    }
+  //         debugPrint(" Uploaded: $downloadUrl");
+  //       } catch (e) {
+  //         debugPrint(" Error uploading file at index $i: $e");
+  //       }
+  //     } else {
+  //       debugPrint(" File at index $i is null or does not exist: $item");
+  //     }
+  //   }
 
-    debugPrint("✅ Uploaded ${pImagesLinks.length} image(s).");
-  }
+  //   debugPrint(" Uploaded ${pImagesLinks.length} image(s).");
+  // }
 
   // uploadImages() async {
   //   pImagesLinks.clear();
@@ -127,6 +131,60 @@ class ProductController extends GetxController {
   //     }
   //   }
   // }
+
+  uploadImages() async {
+    pImagesLinks.clear();
+
+    const cloudName = 'dmsal1h1j'; // Replace with your Cloudinary cloud name
+    const uploadPreset =
+        'upload_image_seller'; // Replace with your Cloudinary upload preset
+    // const String profileFolder = "profile_pictures";
+
+    // const String apiKey = '569851368198557';
+    // const String apiSecret = '-CwmZU-nhabY4cgJ3NkjTtgLYVc';
+
+    final dioClient = dio.Dio(); // <-- Create Dio client here
+
+    // Clean up image list from null or non-existing files
+    pImagesList.removeWhere((file) => file == null || !file.existsSync());
+
+    for (var i = 0; i < pImagesList.length; i++) {
+      var item = pImagesList[i];
+
+      if (item != null && await item.exists()) {
+        final fileName = basename(item.path);
+
+        // <-- Create FormData for the upload
+        final formData = dio.FormData.fromMap({
+          'file': await dio.MultipartFile.fromFile(
+            item.path,
+            filename: fileName,
+          ),
+          'upload_preset': uploadPreset,
+        });
+
+        try {
+          final response = await dioClient.post(
+            'https://api.cloudinary.com/v1_1/$cloudName/image/upload',
+            data: formData,
+            options: dio.Options(contentType: 'multipart/form-data'),
+          );
+
+          if (response.statusCode == 200) {
+            final imageUrl = response.data['secure_url'];
+            pImagesLinks.add(imageUrl);
+            debugPrint("Uploaded to Cloudinary: $imageUrl");
+          } else {
+            debugPrint("Upload failed: ${response.statusMessage}");
+          }
+        } catch (e) {
+          debugPrint("Dio error: $e");
+        }
+      }
+    }
+
+    debugPrint("Done uploading ${pImagesLinks.length} images.");
+  }
 
   uploadProduct(context) async {
     var store = firebaseFirestore.collection(productsCollection).doc();

@@ -83,26 +83,31 @@ class HomeScreen extends StatelessWidget {
                           data[index]['P_wishlist'].length == 0
                               ? const SizedBox()
                               : ListTile(
-                                onTap: () {
-                                  Get.to(
-                                    () => ProductDetails(data: data[index]),
-                                  );
-                                },
-                                leading: Image.network(
-                                  data[index]['P_imgs'][0],
-                                  width: 100,
-                                  height: 100,
-                                  fit: BoxFit.cover,
-                                ),
-                                title: boldText(
-                                  text: "${data[index]['P_name']}",
-                                  color: fontGrey,
-                                ),
-                                subtitle: normalText(
-                                  text: "\$${data[index]['P_price']}",
-                                  color: darkGrey,
-                                ),
-                              ),
+                                    onTap: () {
+                                      Get.to(
+                                        () => ProductDetails(data: data[index]),
+                                      );
+                                    },
+                                    leading: Image.network(
+                                      data[index]['P_imgs'][0],
+                                      width: 100,
+                                      height: 100,
+                                      fit: BoxFit.cover,
+                                    ),
+                                    title: boldText(
+                                      text: "${data[index]['P_name']}",
+                                      color: fontGrey,
+                                    ),
+                                    subtitle: normalText(
+                                      text: "\$${data[index]['P_price']}",
+                                      color: darkGrey,
+                                    ),
+                                  ).box.white.roundedSM.shadowXs
+                                  .margin(
+                                    const EdgeInsets.symmetric(vertical: 4),
+                                  )
+                                  .padding(const EdgeInsets.all(8))
+                                  .make(),
                     ),
                   ),
                 ],

@@ -68,9 +68,19 @@ class ProfileScreen extends StatelessWidget {
               children: [
                 ListTile(
                   leading:
-                      Image.asset(
-                        imgProduct,
-                      ).box.roundedFull.clip(Clip.antiAlias).make(),
+                      controller.snapshotData['imageUrl'] != null &&
+                              controller.snapshotData['imageUrl'] != ''
+                          ? Image.network(
+                            controller.snapshotData['imageUrl'],
+                            width: 50,
+                            height: 50,
+                            fit: BoxFit.cover,
+                          ).box.roundedFull.clip(Clip.antiAlias).make()
+                          : Image.asset(
+                            imgProduct,
+                            width: 50,
+                            height: 50,
+                          ).box.roundedFull.clip(Clip.antiAlias).make(),
                   title: boldText(
                     text: "${controller.snapshotData['vendor_name']}",
                   ),
