@@ -79,7 +79,7 @@ class ProfileController extends GetxController {
         throw 'Cloudinary upload failed with status code: ${response.statusCode}';
       }
     } catch (e) {
-      debugPrint('❌ Upload Image Error: $e');
+      debugPrint('Upload Image Error: $e');
       rethrow; // Propagate error to calling function
     }
   }

@@ -17,13 +17,14 @@ class MessagesScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        backgroundColor: purpleColor,
         leading: IconButton(
           onPressed: () {
             Get.back();
           },
-          icon: Icon(Icons.arrow_back, color: darkGrey),
+          icon: Icon(Icons.arrow_back, color: white),
         ),
-        title: boldText(text: messages, size: 16.0, color: fontGrey),
+        title: boldText(text: messages, size: 16.0, color: white),
       ),
       body: StreamBuilder(
         stream: StoreServices.getMessage(currentUser!.uid),
@@ -32,7 +33,7 @@ class MessagesScreen extends StatelessWidget {
             return lodingIndicator();
           } else {
             var data = snapshot.data!.docs;
-            print("Loaded messages: ${data.length}");
+            // print("Loaded messages: ${data.length}");
             return Padding(
               padding: EdgeInsets.all(8.0),
               child: SingleChildScrollView(
@@ -71,7 +72,7 @@ class MessagesScreen extends StatelessWidget {
                         color: darkGrey,
                       ),
                       trailing: normalText(text: time, color: darkGrey),
-                    );
+                    ).box.white.roundedSM.outerShadowMd.make();
                   }),
                 ),
               ),

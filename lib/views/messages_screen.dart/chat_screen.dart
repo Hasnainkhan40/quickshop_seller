@@ -19,18 +19,19 @@ class ChatScreen extends StatelessWidget {
 
     return Scaffold(
       appBar: AppBar(
+        backgroundColor: purpleColor,
         leading: IconButton(
           onPressed: () {
             Get.back();
           },
-          icon: Icon(Icons.arrow_back, color: darkGrey),
+          icon: Icon(Icons.arrow_back, color: white),
         ),
         title:
             (controller.friendName ?? "Friend")
                 .toString()
                 .text
                 .bold
-                .color(darkGrey)
+                .color(white)
                 .make(),
       ),
       body: Padding(
