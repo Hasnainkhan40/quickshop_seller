@@ -19,7 +19,8 @@ class OrdersScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     var controller = Get.put(OrdersController());
     return Scaffold(
-      appBar: appbarWidget(orders),
+      backgroundColor: lightGrey,
+      appBar: appbarWidget(title: orders, arrow_back: false),
       body: StreamBuilder(
         stream: StoreServices.getOrders(currentUser!.uid),
         builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
@@ -36,45 +37,53 @@ class OrdersScreen extends StatelessWidget {
                   children: List.generate(data.length, (index) {
                     var time = data[index]['order_date'].toDate();
                     return ListTile(
-                      onTap: () {
-                        Get.to(() => OrdersDetails(data: data[index]));
-                      },
+                          onTap: () {
+                            Get.to(() => OrdersDetails(data: data[index]));
+                          },
 
-                      textColor: textfieldGrey,
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(12),
-                      ),
-                      title: boldText(
-                        text: "${data[index]['order_code']}",
-                        color: purpleColor,
-                      ),
-                      subtitle: Column(
-                        children: [
-                          Row(
+                          textColor: textfieldGrey,
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(12),
+                          ),
+                          title: boldText(
+                            text: "${data[index]['order_code']}",
+                            color: purpleColor,
+                          ),
+                          subtitle: Column(
                             children: [
-                              const Icon(Icons.calendar_month, color: fontGrey),
-                              10.heightBox,
-                              boldText(
-                                text: intl.DateFormat().add_yMd().format(time),
-                                color: fontGrey,
+                              Row(
+                                children: [
+                                  const Icon(
+                                    Icons.calendar_month,
+                                    color: fontGrey,
+                                  ),
+                                  10.heightBox,
+                                  boldText(
+                                    text: intl.DateFormat().add_yMd().format(
+                                      time,
+                                    ),
+                                    color: fontGrey,
+                                  ),
+                                ],
+                              ),
+                              Row(
+                                children: [
+                                  const Icon(Icons.payment, color: fontGrey),
+                                  10.heightBox,
+                                  boldText(text: unpaid, color: red),
+                                ],
                               ),
                             ],
                           ),
-                          Row(
-                            children: [
-                              const Icon(Icons.payment, color: fontGrey),
-                              10.heightBox,
-                              boldText(text: unpaid, color: red),
-                            ],
+                          trailing: boldText(
+                            text: "\$ ${data[index]['total_amount']}",
+                            color: purpleColor,
+                            size: 16.0,
                           ),
-                        ],
-                      ),
-                      trailing: boldText(
-                        text: "\$ ${data[index]['total_amount']}",
-                        color: purpleColor,
-                        size: 16.0,
-                      ),
-                    ).box.margin(EdgeInsets.only(bottom: 4)).make();
+                        ).box.roundedLg
+                        .color(Colors.white70)
+                        .margin(EdgeInsets.all(4))
+                        .make();
                   }),
                 ),
               ),

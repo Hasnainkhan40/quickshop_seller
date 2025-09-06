@@ -1,4 +1,4 @@
-const appname = "eMart Seller App",
+const appname = "Quickshop Seller App",
     login = "Login",
     welcome = "Hi, Welcome to",
     email = "Email",
@@ -28,7 +28,7 @@ const appname = "eMart Seller App",
     confirmPass = "Confirm Password",
     name = "User Name",
     chats = "Chats",
-    credit = "@BaabaDevs";
+    credit = "@hasnaink40";
 
 //shop settings string
 

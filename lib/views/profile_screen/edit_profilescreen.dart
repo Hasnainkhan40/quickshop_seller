@@ -1,10 +1,12 @@
 import 'dart:io';
+import 'dart:ui';
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get/get_rx/src/rx_types/rx_types.dart';
 import 'package:get/get_state_manager/get_state_manager.dart';
 import 'package:get/instance_manager.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:quickshop_seller/const/const.dart';
 import 'package:quickshop_seller/const/images.dart';
 import 'package:quickshop_seller/const/loading_indicator.dart';
@@ -34,15 +36,41 @@ class _EditProfilescreenState extends State<EditProfilescreen> {
     return Obx(
       () => Scaffold(
         resizeToAvoidBottomInset: false,
-        backgroundColor: purpleColor,
+        backgroundColor: lightGrey,
         appBar: AppBar(
+          backgroundColor: Colors.white.withOpacity(0.6), // translucent
+          elevation: 0,
+          automaticallyImplyLeading: false,
+          centerTitle: true,
+          flexibleSpace: ClipRRect(
+            child: BackdropFilter(
+              filter: ImageFilter.blur(
+                sigmaX: 10,
+                sigmaY: 10,
+              ), // iOS blur effect
+              child: Container(color: Colors.white.withOpacity(0.2)),
+            ),
+          ),
+          title: Text(
+            editProfile,
+            style: GoogleFonts.inter(
+              // or sfPro if added
+              fontSize: 20,
+              fontWeight: FontWeight.w600,
+              color: Colors.black,
+              letterSpacing: -0.2, // iOS-like tight spacing
+            ),
+          ),
           leading: IconButton(
+            icon: const Icon(
+              Icons.arrow_back_ios_new,
+              size: 20,
+              color: Colors.black87,
+            ),
             onPressed: () {
               Get.back();
             },
-            icon: Icon(Icons.arrow_back, color: white),
           ),
-          title: boldText(text: editProfile, size: 16.0),
           actions: [
             controller.isLoading.value
                 ? lodingIndicator(circleColor: white)
@@ -118,7 +146,7 @@ class _EditProfilescreenState extends State<EditProfilescreen> {
           ],
         ),
         body: Padding(
-          padding: EdgeInsets.all(8.0),
+          padding: EdgeInsets.all(16.0),
           child: Column(
             children: [
               controller.snapshotData['imageUrl'] == '' &&

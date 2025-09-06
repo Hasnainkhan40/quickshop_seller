@@ -1,14 +1,14 @@
 import 'package:quickshop_seller/const/const.dart';
+import 'package:quickshop_seller/const/styles.dart';
 import 'package:quickshop_seller/views/widgets/text_style.dart';
 
-Widget ourButton({title, color = purpleColor, onPress}) {
+Widget ourButton({onPress, color, textcolor, String? title}) {
   return ElevatedButton(
     style: ElevatedButton.styleFrom(
-      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
       backgroundColor: color,
       padding: const EdgeInsets.all(12),
     ),
     onPressed: onPress,
-    child: normalText(text: title, size: 16.0),
+    child: title!.text.color(white).fontFamily(bold).make(),
   );
 }
