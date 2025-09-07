@@ -2,7 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
 import 'package:quickshop_seller/const/const.dart';
+import 'package:quickshop_seller/const/images.dart';
 import 'package:quickshop_seller/controller/auth_controller.dart';
+import 'package:quickshop_seller/views/auth_screen/forgetPass.dart';
 
 /*Color 01: Color(0xFF2F4B4E)
 Color 02: Color(0xFFBFC7C8)
@@ -52,7 +54,7 @@ class _LoginScreenState extends State<LoginScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      resizeToAvoidBottomInset: true, // important when keyboard appears
+      resizeToAvoidBottomInset: true,
       body: Container(
         width: double.infinity,
         decoration: const BoxDecoration(
@@ -60,17 +62,18 @@ class _LoginScreenState extends State<LoginScreen> {
             colors: [Color(0xFF4A90E2), Color(0xFF007AFF)],
             begin: Alignment.topLeft,
             end: Alignment.bottomRight,
-          ), // gradient background
+          ),
         ),
         child: SafeArea(
           child: Column(
             children: [
               const SizedBox(height: 40),
-              const Icon(
-                Icons.shopping_bag_rounded,
-                size: 60,
-                color: Colors.white,
-              ),
+              // const Icon(
+              //   Icons.shopping_bag_rounded,
+              //   size: 60,
+              //   color: Colors.white,
+              // ),
+              Center(child: Image.asset(icAppLogo, height: 100, color: white)),
               const SizedBox(height: 10),
               const Text(
                 "Welcome back 👋",
@@ -168,7 +171,9 @@ class _LoginScreenState extends State<LoginScreen> {
                         Align(
                           alignment: Alignment.centerRight,
                           child: TextButton(
-                            onPressed: () {},
+                            onPressed: () {
+                              Get.to(() => ForgotPasswordScreen());
+                            },
                             child: const Text(
                               "Forgot Password?",
                               style: TextStyle(color: Colors.grey),

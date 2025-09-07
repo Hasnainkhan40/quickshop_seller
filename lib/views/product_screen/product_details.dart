@@ -19,19 +19,23 @@ class ProductDetails extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             // Product image carousel
-            VxSwiper.builder(
-              autoPlay: true,
-              height: 280,
-              itemCount: data['P_imgs'].length,
-              aspectRatio: 16 / 9,
-              viewportFraction: 1.0,
-              itemBuilder: (context, index) {
-                return Image.network(
-                  data['P_imgs'][index],
-                  width: double.infinity,
-                  fit: BoxFit.cover,
-                );
-              },
+            Column(
+              children: [
+                VxSwiper.builder(
+                  autoPlay: true,
+                  height: 280,
+                  itemCount: data['P_imgs'].length,
+                  aspectRatio: 16 / 9,
+                  viewportFraction: 1.0,
+                  itemBuilder: (context, index) {
+                    return Image.network(
+                      data['P_imgs'][index],
+                      width: double.infinity,
+                      fit: BoxFit.cover,
+                    );
+                  },
+                ),
+              ],
             ),
             const SizedBox(height: 12),
 

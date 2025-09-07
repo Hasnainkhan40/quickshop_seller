@@ -7,6 +7,15 @@ class ChatsController extends GetxController {
   @override
   void onInit() {
     getChatId();
+    scrollController.addListener(() {
+      if (!scrollController.hasClients) return;
+
+      final maxScroll = scrollController.position.maxScrollExtent;
+      final currentScroll = scrollController.offset;
+
+      // user is near bottom if within 100px of max scroll
+      isNearBottom.value = (maxScroll - currentScroll) < 100;
+    });
     super.onInit();
   }
 
@@ -19,10 +28,22 @@ class ChatsController extends GetxController {
   var currentId = currentUser!.uid;
 
   var msgController = TextEditingController();
+  var scrollController = ScrollController();
+  var isNearBottom = true.obs; // 👈 tracks if user is near bottom
 
   dynamic chatDocId;
 
   var isLoading = false.obs;
+
+  void scrollToBottom() {
+    if (scrollController.hasClients) {
+      scrollController.animateTo(
+        scrollController.position.maxScrollExtent,
+        duration: const Duration(milliseconds: 300),
+        curve: Curves.easeOut,
+      );
+    }
+  }
 
   getChatId() async {
     isLoading(true);

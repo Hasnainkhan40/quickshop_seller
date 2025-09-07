@@ -231,11 +231,18 @@ class ChatScreen extends StatelessWidget {
                               ),
                             );
                           } else {
+                            WidgetsBinding.instance.addPostFrameCallback((_) {
+                              if (controller.isNearBottom.value) {
+                                controller.scrollToBottom();
+                              }
+                            });
                             return Stack(
                               children: [
                                 ListView.builder(
                                   padding: const EdgeInsets.all(12),
-                                  //controller: controller.scrollController,
+                                  controller:
+                                      controller
+                                          .scrollController, // 👈 attach here
                                   itemCount: snapshot.data!.docs.length,
                                   itemBuilder: (context, index) {
                                     var doc = snapshot.data!.docs[index];
@@ -252,27 +259,26 @@ class ChatScreen extends StatelessWidget {
                                   },
                                 ),
 
-                                // // FAB reacts to isNearBottom changes
-                                // Obx(() {
-                                //   if (!controller.isNearBottom.value) {
-                                //     return Positioned(
-                                //       bottom: 10,
-                                //       right: 10,
-                                //       child: FloatingActionButton(
-                                //         mini: true,
-                                //         backgroundColor: Colors.green,
-                                //         child: const Icon(
-                                //           Icons.arrow_downward,
-                                //           color: Colors.black,
-                                //         ),
-                                //         onPressed:
-                                //             () => controller.scrollToBottom(),
-                                //       ),
-                                //     );
-                                //   } else {
-                                //     return const SizedBox.shrink(); // nothing shown
-                                //   }
-                                // }),
+                                Obx(() {
+                                  if (!controller.isNearBottom.value) {
+                                    return Positioned(
+                                      bottom: 10,
+                                      right: 10,
+                                      child: FloatingActionButton(
+                                        mini: true,
+                                        backgroundColor: primaryColors,
+                                        child: const Icon(
+                                          Icons.arrow_downward,
+                                          color: Colors.white,
+                                        ),
+                                        onPressed:
+                                            () => controller.scrollToBottom(),
+                                      ),
+                                    );
+                                  } else {
+                                    return const SizedBox.shrink();
+                                  }
+                                }),
                               ],
                             );
                           }
@@ -284,7 +290,7 @@ class ChatScreen extends StatelessWidget {
           // ✅ Input field
           Container(
             padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
-            color: Colors.white,
+            color: lightGrey,
             child: Row(
               children: [
                 // Input
