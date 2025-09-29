@@ -195,10 +195,12 @@ class ProfileScreen extends StatelessWidget {
           } else {
             controller.snapshotData = snapshot.data!.docs[0];
 
-            final String imageUrl = controller.snapshotData['imageUrl'] ?? '';
+            final String imageUrl =
+                (controller.snapshotData['imageUrl'] as String?) ?? '';
             final String vendorName =
-                controller.snapshotData['vendor_name'] ?? '';
-            final String email = controller.snapshotData['email'] ?? '';
+                (controller.snapshotData['vendor_name'] as String?) ?? 'Vendor';
+            final String email =
+                (controller.snapshotData['email'] as String?) ?? 'No email';
 
             return Column(
               children: [

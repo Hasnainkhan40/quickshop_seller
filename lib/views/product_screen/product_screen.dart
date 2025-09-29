@@ -19,7 +19,7 @@ class ProductScreen extends StatelessWidget {
     var controller = Get.put(ProductController());
 
     return Scaffold(
-      backgroundColor: lightGrey, // light grey bg
+      backgroundColor: lightGrey,
       floatingActionButton: FloatingActionButton(
         backgroundColor: primaryColors,
 
@@ -75,7 +75,6 @@ class ProductScreen extends StatelessWidget {
                     child: Row(
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
-                        // Product image
                         ClipRRect(
                           borderRadius: BorderRadius.circular(8),
                           child:
