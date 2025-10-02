@@ -44,21 +44,17 @@ class _EditProfilescreenState extends State<EditProfilescreen> {
           centerTitle: true,
           flexibleSpace: ClipRRect(
             child: BackdropFilter(
-              filter: ImageFilter.blur(
-                sigmaX: 10,
-                sigmaY: 10,
-              ), // iOS blur effect
+              filter: ImageFilter.blur(sigmaX: 10, sigmaY: 10),
               child: Container(color: Colors.white.withOpacity(0.2)),
             ),
           ),
           title: Text(
             editProfile,
             style: GoogleFonts.inter(
-              // or sfPro if added
               fontSize: 20,
               fontWeight: FontWeight.w600,
               color: Colors.black,
-              letterSpacing: -0.2, // iOS-like tight spacing
+              letterSpacing: -0.2,
             ),
           ),
           leading: IconButton(

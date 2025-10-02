@@ -20,24 +20,23 @@ class AddProduct extends StatelessWidget {
     return Scaffold(
       backgroundColor: lightGrey,
       appBar: AppBar(
-        backgroundColor: Colors.white.withOpacity(0.6), // translucent
+        backgroundColor: Colors.white.withOpacity(0.6),
         elevation: 0,
         automaticallyImplyLeading: false,
         centerTitle: true,
         flexibleSpace: ClipRRect(
           child: BackdropFilter(
-            filter: ImageFilter.blur(sigmaX: 10, sigmaY: 10), // iOS blur effect
+            filter: ImageFilter.blur(sigmaX: 10, sigmaY: 10),
             child: Container(color: Colors.white.withOpacity(0.2)),
           ),
         ),
         title: Text(
           "Add products",
           style: GoogleFonts.inter(
-            // or sfPro if added
             fontSize: 20,
             fontWeight: FontWeight.w600,
             color: Colors.black,
-            letterSpacing: -0.2, // iOS-like tight spacing
+            letterSpacing: -0.2,
           ),
         ),
         leading: IconButton(

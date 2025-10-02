@@ -13,7 +13,6 @@ class ChatsController extends GetxController {
       final maxScroll = scrollController.position.maxScrollExtent;
       final currentScroll = scrollController.offset;
 
-      // user is near bottom if within 100px of max scroll
       isNearBottom.value = (maxScroll - currentScroll) < 100;
     });
     super.onInit();
@@ -29,7 +28,7 @@ class ChatsController extends GetxController {
 
   var msgController = TextEditingController();
   var scrollController = ScrollController();
-  var isNearBottom = true.obs; // 👈 tracks if user is near bottom
+  var isNearBottom = true.obs;
 
   dynamic chatDocId;
 

@@ -14,7 +14,6 @@ Widget exitDialog(BuildContext context) {
       child: Column(
         mainAxisSize: MainAxisSize.min,
         children: [
-          // 🔹 Icon at top
           Container(
             padding: const EdgeInsets.all(16),
             decoration: BoxDecoration(
@@ -29,7 +28,6 @@ Widget exitDialog(BuildContext context) {
           ),
           const SizedBox(height: 16),
 
-          // 🔹 Title
           Text(
             "Exit App?",
             style: TextStyle(
@@ -40,7 +38,6 @@ Widget exitDialog(BuildContext context) {
           ),
           const SizedBox(height: 12),
 
-          // 🔹 Message
           Text(
             "Are you sure you want to close QuickShop Seller?",
             textAlign: TextAlign.center,
@@ -52,7 +49,6 @@ Widget exitDialog(BuildContext context) {
           ),
           const SizedBox(height: 20),
 
-          // 🔹 Buttons
           Row(
             children: [
               Expanded(

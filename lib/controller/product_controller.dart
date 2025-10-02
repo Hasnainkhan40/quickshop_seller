@@ -1,7 +1,6 @@
 import 'dart:io';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
@@ -73,79 +72,13 @@ class ProductController extends GetxController {
     }
   }
 
-  // uploadImages() async {
-  //   pImagesLinks.clear();
-
-  //   // Optional: remove null or invalid files
-  //   pImagesList.removeWhere((file) => file == null || !file.existsSync());
-
-  //   for (var i = 0; i < pImagesList.length; i++) {
-  //     var item = pImagesList[i];
-
-  //     if (item != null && await item.exists()) {
-  //       final size = await item.length();
-
-  //       if (size == 0) {
-  //         debugPrint(" Skipping file at index $i: File is empty.");
-  //         continue;
-  //       }
-
-  //       try {
-  //         final filename = basename(item.path);
-  //         final safeFilename =
-  //             '${DateTime.now().millisecondsSinceEpoch}_$filename';
-  //         final destination =
-  //             'images/vendors/${currentUser!.uid}/$safeFilename';
-
-  //         debugPrint(" Uploading: ${item.path} to $destination");
-
-  //         Reference ref = FirebaseStorage.instance.ref().child(destination);
-  //         UploadTask uploadTask = ref.putFile(item);
-  //         TaskSnapshot snapshot = await uploadTask;
-
-  //         final downloadUrl = await snapshot.ref.getDownloadURL();
-  //         pImagesLinks.add(downloadUrl);
-
-  //         debugPrint(" Uploaded: $downloadUrl");
-  //       } catch (e) {
-  //         debugPrint(" Error uploading file at index $i: $e");
-  //       }
-  //     } else {
-  //       debugPrint(" File at index $i is null or does not exist: $item");
-  //     }
-  //   }
-
-  //   debugPrint(" Uploaded ${pImagesLinks.length} image(s).");
-  // }
-
-  // uploadImages() async {
-  //   pImagesLinks.clear();
-  //   for (var item in pImagesList) {
-  //     if (item != null) {
-  //       var filename = basename(item.path);
-  //       var destination = 'images/vendors/${currentUser!.uid}/$filename';
-  //       Reference ref = FirebaseStorage.instance.ref().child(destination);
-  //       await ref.putFile(item);
-  //       var n = await ref.getDownloadURL();
-  //       pImagesLinks.add(n);
-  //     }
-  //   }
-  // }
-
   uploadImages() async {
     pImagesLinks.clear();
 
-    const cloudName = 'dmsal1h1j'; // Replace with your Cloudinary cloud name
-    const uploadPreset =
-        'upload_image_seller'; // Replace with your Cloudinary upload preset
-    // const String profileFolder = "profile_pictures";
+    const cloudName = 'dmsal1h1j';
+    const uploadPreset = 'upload_image_seller';
 
-    // const String apiKey = '569851368198557';
-    // const String apiSecret = '-CwmZU-nhabY4cgJ3NkjTtgLYVc';
-
-    final dioClient = dio.Dio(); // <-- Create Dio client here
-
-    // Clean up image list from null or non-existing files
+    final dioClient = dio.Dio();
     pImagesList.removeWhere((file) => file == null || !file.existsSync());
 
     for (var i = 0; i < pImagesList.length; i++) {
@@ -154,7 +87,6 @@ class ProductController extends GetxController {
       if (item != null && await item.exists()) {
         final fileName = basename(item.path);
 
-        // <-- Create FormData for the upload
         final formData = dio.FormData.fromMap({
           'file': await dio.MultipartFile.fromFile(
             item.path,

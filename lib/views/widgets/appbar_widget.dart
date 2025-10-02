@@ -6,24 +6,23 @@ import 'package:intl/intl.dart' as intl;
 
 AppBar appbarWidget({title, bool arrow_back = false, bool isTime = false}) {
   return AppBar(
-    backgroundColor: Colors.white.withOpacity(0.6), // translucent
+    backgroundColor: Colors.white.withOpacity(0.6),
     elevation: 0,
     automaticallyImplyLeading: false,
     centerTitle: true,
     flexibleSpace: ClipRRect(
       child: BackdropFilter(
-        filter: ImageFilter.blur(sigmaX: 10, sigmaY: 10), // iOS blur effect
+        filter: ImageFilter.blur(sigmaX: 10, sigmaY: 10),
         child: Container(color: Colors.white.withOpacity(0.2)),
       ),
     ),
     title: Text(
       title,
       style: GoogleFonts.inter(
-        // or sfPro if added
         fontSize: 20,
         fontWeight: FontWeight.w600,
         color: Colors.black,
-        letterSpacing: -0.2, // iOS-like tight spacing
+        letterSpacing: -0.2,
       ),
     ),
     leading:
@@ -49,9 +48,7 @@ AppBar appbarWidget({title, bool arrow_back = false, bool isTime = false}) {
             isTime
                 ? Center(
                   child: Text(
-                    intl.DateFormat(
-                      'EEE, MMM d',
-                    ).format(DateTime.now()), // cleaner format
+                    intl.DateFormat('EEE, MMM d').format(DateTime.now()),
                     style: GoogleFonts.inter(
                       fontSize: 14,
                       fontWeight: FontWeight.w400,
@@ -67,28 +64,3 @@ AppBar appbarWidget({title, bool arrow_back = false, bool isTime = false}) {
     ),
   );
 }
-
-// import 'package:quickshop_seller/const/const.dart';
-// import 'package:quickshop_seller/views/widgets/text_style.dart';
-// import 'package:intl/intl.dart' as intl;
-
-// AppBar appbarWidget(title) {
-//   return AppBar(
-//     backgroundColor: Colors.white.withOpacity(0.20),
-//     automaticallyImplyLeading: false,
-//     title: boldText(text: dashboard, color: fontGrey, size: 16.0),
-//     actions: [
-//       Center(
-//         child: normalText(
-//           text: intl.DateFormat(
-//             'EEE, MMM d, '
-//             'yy',
-//           ).format(DateTime.now()),
-//           color: fontGrey,
-//           size: 16.0,
-//         ),
-//       ),
-//       10.heightBox,
-//     ],
-//   );
-// }

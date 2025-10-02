@@ -63,7 +63,7 @@ class _OrdersDetailsState extends State<OrdersDetails> {
           ),
         ),
 
-        // Confirm Order Button (Bottom CTA)
+        // Confirm Order Button
         bottomNavigationBar: Visibility(
           visible: !controller.confirmed.value,
           child: Padding(
@@ -261,7 +261,7 @@ class _OrdersDetailsState extends State<OrdersDetails> {
     );
   }
 
-  // 🔹 Timeline (Modern Style)
+  //Timeline
   Widget _buildTimeline() {
     List<Map<String, dynamic>> steps = [
       {"title": "Placed", "done": true},
@@ -326,7 +326,6 @@ class _OrdersDetailsState extends State<OrdersDetails> {
     );
   }
 
-  // 🔹 Helper Widgets
   Widget _buildCard({required Widget child}) {
     return Container(
       width: double.infinity,

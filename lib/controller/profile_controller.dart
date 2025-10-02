@@ -30,21 +30,8 @@ class ProfileController extends GetxController {
   var shopWebsiteController = TextEditingController();
   var shopDescController = TextEditingController();
 
-  // changeImage(context) async {
-  //   try {
-  //     final img = await ImagePicker().pickImage(
-  //       source: ImageSource.gallery,
-  //       imageQuality: 70,
-  //     );
-  //     if (img == null) return;
-  //     profileImagePath.value = img.path;
-  //   } on PlatformException catch (e) {
-  //     VxToast.show(context, msg: e.toString());
-  //   }
-  // }
   Future<dio.Response> uploadImage(File image) async {
     try {
-      // Construct the Cloudinary API endpoint
       String api = UApiUrls.uploadApi(UKeys.cloudName);
 
       final fileName = image.path.split('/').last;
@@ -60,7 +47,6 @@ class ProfileController extends GetxController {
 
       final dioInstance = dio.Dio();
 
-      // Optional: Logging interceptor for debugging
       dioInstance.interceptors.add(
         dio.LogInterceptor(
           request: true,
@@ -72,7 +58,6 @@ class ProfileController extends GetxController {
 
       final response = await dioInstance.post(api, data: formData);
 
-      // Optional: Check for success response
       if (response.statusCode == 200) {
         return response;
       } else {
@@ -80,7 +65,7 @@ class ProfileController extends GetxController {
       }
     } catch (e) {
       debugPrint('Upload Image Error: $e');
-      rethrow; // Propagate error to calling function
+      rethrow;
     }
   }
 
