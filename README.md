@@ -31,10 +31,11 @@ The app is designed to be fast, lightweight, and easy to use with a clean UI bui
 
 ---
 
-## 📸 Screenshots
-![WhatsApp Image 2025-07-16 at 10 46 03_48f3f0a6](https://github.com/user-attachments/assets/4aec977c-5cf4-4afe-a5a1-90527b8ab27c)
+## 🖼️ Screenshots
 
-![WhatsApp Image 2025-07-16 at 10 46 02_dd225969](https://github.com/user-attachments/assets/3cc6df1f-3696-4614-8c73-bc329c309b8f)
+|   Ui |   Ui |   Ui |   Ui |
+|:--------:|:----------:|:----------:|:----------:|
+| ![Home](assets/screenshots/QuickShop-1.png) | ![Orders](assets/screenshots/QuickShop-4.png) | ![Profile](assets/screenshots/QuickShop-3.png) |  ![Cart](assets/screenshots/QuickShop-6.png) |
 
 
 ---
