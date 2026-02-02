@@ -28,7 +28,10 @@ The app is designed to be fast, lightweight, and easy to use with a clean UI bui
 - 🔁 REST API integration via `http`
 - 🎨 Stylish UI with VelocityX
 - 🔔 Real-time updates and alerts
-
+- 💳 Secure Stripe payment integration
+-     Card payments
+      Real-time payment confirmation
+      Secure client–server payment flow
 ---
 
 ## 🖼️ Screenshots
